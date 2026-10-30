@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>คำนวณภาษีเงินเดือน ปีภาษี 2569</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#849946;--accent-dark:#6b7d38;--accent-light:#a8bd60;
+--bg:#F5F7EE;--sf:#fff;--ink:#222A14;--mut:#5F6A4A;--ln:#DFE5CC;--ac:var(--accent-dark);--hi:var(--accent-light);--hiInk:#1F2810;--bar:#E6EDCF;--bad:#B3402A;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#151A0E;--sf:#1E2514;--ink:#EBF0DD;--mut:#A5B08A;--ln:#32391F;--ac:var(--accent-light);--hi:var(--accent);--hiInk:#10150A;--bar:#2E3820;--bad:#F08A72}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#151A0E;--sf:#1E2514;--ink:#EBF0DD;--mut:#A5B08A;--ln:#32391F;--ac:var(--accent-light);--hi:var(--accent);--hiInk:#10150A;--bar:#2E3820;--bad:#F08A72}
+html{scroll-padding-top:64px;scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 "Noto Sans Thai",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1080px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:2.1rem;line-height:1.3;letter-spacing:-.01em;margin:18px 0 6px}
+h2{font-size:1.05rem;margin:0 0 10px}
+.sub{color:var(--mut);margin:0 0 20px}
+.nv{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:8px;padding:10px 16px;margin:0 -16px;overflow-x:auto;background:var(--bg)}
+.nv a{padding:7px 16px;border-radius:99px;background:var(--sf);color:var(--ink);text-decoration:none;font-size:.9rem;white-space:nowrap;box-shadow:0 0 0 1px var(--ln)}
+.grid{display:grid;gap:20px;grid-template-columns:1fr}
+@media(min-width:880px){.grid{grid-template-columns:1fr 420px;align-items:start}.res{position:sticky;top:64px}}
+section.card{background:var(--sf);border-radius:20px;box-shadow:0 1px 3px rgba(34,42,20,.08);padding:20px 22px;margin-bottom:14px}
+.f{display:grid;grid-template-columns:1fr 150px;gap:4px 12px;align-items:center;padding:6px 0;border-top:1px solid var(--ln)}
+.f:first-of-type{border-top:0}
+.f label{font-size:.95rem}
+.f small{grid-column:1/-1;color:var(--mut);font-size:.8rem;margin-top:-2px}
+input[type=number]{width:100%;padding:8px 10px;border:1px solid var(--ln);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;text-align:right}
+input:focus-visible,button:focus-visible,.nv a:focus-visible{outline:3px solid var(--ac);outline-offset:1px}
+.big{background:var(--accent-dark);color:#fff;border-radius:20px;padding:24px;margin-bottom:14px}
+.big .lb{font-size:.9rem;font-weight:500}
+.big .n{font-size:3rem;font-weight:700;line-height:1.2;color:#E3EFB8}
+.big .s{font-size:.9rem;margin-top:4px}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-top:1px solid var(--ln);font-size:.92rem}
+.kv:first-of-type{border-top:0}
+.kv b{font-variant-numeric:tabular-nums;font-weight:500;white-space:nowrap}
+.kv.t{font-weight:700}.kv.t b{font-weight:700}
+.lad{display:grid;grid-template-columns:96px 1fr 140px;gap:4px 10px;align-items:center;font-size:.84rem;font-variant-numeric:tabular-nums}
+.bw{height:12px;background:var(--bar);border-radius:6px;overflow:hidden}
+.bw i{display:block;height:100%;background:var(--ac);border-radius:6px;transition:width .25s}
+.lad .r{text-align:right}.lad .rate{color:var(--mut)}
+.note{font-size:.8rem;color:var(--mut);margin-top:18px}
+.tw{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;min-width:440px;font-size:.85rem}
+th{font-weight:500;color:var(--mut);text-align:right;padding:4px}
+th:first-child,td:first-child{text-align:left;padding-right:6px}
+td{padding:3px}td input{padding:6px;font-size:.85rem}
+.bt{display:flex;flex-wrap:wrap;gap:8px}
+.hint{margin:0;font-size:.85rem;color:var(--mut)}
+#cp,#clr,#ot{padding:8px 12px;border:1px solid var(--ac);border-radius:8px;background:transparent;color:var(--ac);font:inherit;font-size:.9rem;cursor:pointer;margin-bottom:8px}
+#sv{font-size:.8rem;color:var(--mut);margin:0 0 12px}
+.stairs{display:flex;align-items:flex-end;gap:5px;margin:16px 0 10px;text-align:center}
+.stairs .c{flex:1;display:flex;flex-direction:column;justify-content:flex-end;min-width:0}
+.stairs .s{background:var(--bar);border-radius:8px 8px 3px 3px;overflow:hidden;display:flex;align-items:flex-end}
+.stairs .s i{display:block;width:100%;background:var(--ac);transition:height .3s}
+.stairs b{font-size:.85rem;margin-top:4px}.stairs small{font-size:.66rem;color:var(--mut)}
+.st{list-style:none;counter-reset:n;padding:0;margin:0}
+.st li{counter-increment:n;display:grid;grid-template-columns:34px 1fr;gap:2px 12px;padding:14px 0;border-top:1px solid var(--ln)}
+.st li:first-child{border-top:0}
+.st li::before{content:counter(n);grid-row:span 2;width:30px;height:30px;border-radius:50%;background:var(--accent-dark);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.9rem}
+.st u{text-decoration:none;font-weight:700;background:var(--hi);color:var(--hiInk);padding:0 6px;border-radius:6px}
+.st span{color:var(--mut);font-size:.92rem}
+html:root:root{color-scheme:light;--bg:#FBFCF5;--sf:#fff;--ink:#2B3318;--mut:#66714F;--ln:#E8EDD8;--ac:var(--accent-dark);--hi:var(--accent-light);--hiInk:#1F2810;--bar:#EEF3DC;--bad:#B3402A}
+.big{background:linear-gradient(135deg,#E3EDC2,#C9DA95);color:#2B3318;box-shadow:0 1px 3px rgba(34,42,20,.08)}
+.big .n{color:#4F5E26}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bw i,.stairs .s i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nv"><a href="#calc">คำนวณภาษี</a><a href="#steps">วิธีคิดทีละขั้น</a><a href="#stairs">ขั้นบันไดภาษี</a></nav>
+<h1>คำนวณภาษีเงินได้ พร้อมอธิบายทุกขั้นตอน</h1>
+<p class="sub">ปีภาษี 2569 (รายได้ ม.ค.–ธ.ค. 2569 ยื่นแบบภายในต้นปี 2570) กรอกเฉพาะช่องที่มี ผลจะคำนวณให้ทันที</p>
+<p id="sv">กำลังโหลดข้อมูลที่บันทึกไว้…</p>
+<div class="grid" id="calc">
+<div id="form"></div>
+<aside class="res" aria-live="polite">
+<div class="big"><div class="lb" id="rl">ภาษีที่ต้องเสียทั้งปี</div><div class="n" id="rt">0</div><div class="s" id="rs"></div></div>
+<section class="card"><h2>สรุปการคำนวณ</h2><div id="sum"></div></section>
+<section class="card"><h2>ภาษีแต่ละขั้นบันได</h2><div class="lad" id="lad"></div></section>
+<section class="card"><h2>ยังใช้สิทธิ์ลดหย่อนได้อีกเท่าไร</h2><div id="room"></div></section>
+</aside>
+</div>
+<section class="card" id="steps"><h2>วิธีคิดภาษี ทีละขั้น (ใช้ตัวเลขของคุณ)</h2><ol class="st" id="stl"></ol></section>
+<section class="card" id="stairs"><h2>ขั้นบันไดภาษี</h2><p class="hint">ภาษีคิดเฉพาะส่วนที่ตกในแต่ละขั้น ไม่ได้เอาอัตราสูงสุดไปคูณทั้งก้อน เงินได้สุทธิของคุณไต่ขึ้นบันไดจากซ้ายไปขวา สีเข้มคือส่วนที่คุณอยู่ในขั้นนั้น</p><div class="stairs" id="stg"></div><div id="stx"></div></section>
+<section class="card"><h2>เตรียมอะไรตอนยื่นภาษี</h2><p class="hint">ยื่น ภ.ง.ด.91 ช่วง ม.ค. – มี.ค. 2570 ผ่าน rd.go.th หรือแอป RD Smart Tax (ออนไลน์ขยายถึงต้น เม.ย. ตามประกาศ)</p><p class="hint" style="margin-top:8px"><b>ใช้ได้:</b> ใบ 50 ทวิจากนายจ้าง (ขอได้ช่วง ม.ค.–ก.พ.), หนังสือรับรองเบี้ยประกัน, ใบรับรองการซื้อกองทุน, หนังสือรับรองดอกเบี้ยบ้าน, ใบเสร็จบริจาค</p><p class="hint" style="margin-top:8px"><b>ใช้ลดหย่อนไม่ได้:</b> สลิปบัตรเครดิต, ใบเสร็จ Grab ทั่วไป, ใบกำกับภาษีกระดาษ (ปี 2569 ยังไม่พบมาตรการช้อปลดหย่อน)</p></section>
+<button type="button" id="clr" style="margin-top:14px">ล้างข้อมูลทั้งหมด</button>
+<p class="note">ข้อมูลที่กรอกจะถูกบันทึกอัตโนมัติ เป็นส่วนตัวของบัญชีคุณ (สำรองไว้ในเบราว์เซอร์เครื่องนี้ด้วย) เป็นการประมาณการเพื่อวางแผน ไม่ใช่คำปรึกษาด้านภาษี เงื่อนไขและวงเงินลดหย่อนอาจเปลี่ยนแปลงในแต่ละปี โดยเฉพาะมาตรการรัฐ (เช่น Easy e-Receipt) ซึ่งให้กรอกในช่อง “ลดหย่อนอื่น ๆ” ตรวจสอบกับกรมสรรพากร (rd.go.th) ก่อนยื่นจริง</p>
+</div>
+<script>
+const S=[
+["โบนัส",[
+{id:"bon",l:"โบนัส ต่อปี",v:0}]],
+["ประกัน",[
+{id:"ss",l:"เงินสมทบประกันสังคม ต่อปี",v:"",h:"เว้นว่าง = คิดให้อัตโนมัติ (5% ของรายได้รายเดือน เดือนละไม่เกิน 875 รวมไม่เกิน 10,500 ต่อปี)"},
+{id:"life",l:"เบี้ยประกันชีวิต",v:0,h:"สูงสุด 100,000"},
+{id:"hlt",l:"เบี้ยประกันสุขภาพของตนเอง",v:0,h:"สูงสุด 25,000 และรวมกับประกันชีวิตไม่เกิน 100,000"},
+]],
+["เกษียณและกองทุน",[
+{id:"pvd",l:"กองทุนสำรองเลี้ยงชีพ / กบข. ที่ท่านจ่ายเอง",v:0,h:"ไม่เกิน 15% ของเงินได้ และ 500,000"},
+{id:"rmf",l:"กองทุน RMF",v:0,h:"ไม่เกิน 30% ของเงินได้ และ 500,000"},
+{id:"pen",l:"เบี้ยประกันชีวิตแบบบำนาญ",v:0,h:"ไม่เกิน 15% ของเงินได้ และ 200,000"},
+{id:"nsf",l:"กองทุนการออมแห่งชาติ (กอช.)",v:0,h:"สูงสุด 30,000"},
+{id:"esg",l:"กองทุน Thai ESG / Thai ESGX (เงินใหม่)",v:0,h:"ไม่เกิน 30% ของเงินได้ และ 300,000 ไม่รวมในเพดานกลุ่มเกษียณ"}]],
+["อื่น ๆ",[
+{id:"mor",l:"ดอกเบี้ยเงินกู้ซื้อที่อยู่อาศัย",v:0,h:"สูงสุด 100,000"},
+{id:"dg",l:"เงินบริจาคทั่วไป",v:0},
+{id:"de",l:"เงินบริจาคเพื่อการศึกษา กีฬา โรงพยาบาลรัฐ",v:0,h:"หักได้ 2 เท่าของที่จ่ายจริง"},
+{id:"oth",l:"ลดหย่อนอื่น ๆ (เช่น มาตรการรัฐ)",v:0,h:"กรอกยอดที่หักได้จริงตามเงื่อนไขของปีนั้น"}]],
+];
+const B=[[150000,0],[300000,5],[500000,10],[750000,15],[1000000,20],[2000000,25],[5000000,30],[Infinity,35]];
+const F=x=>Math.round(x).toLocaleString("th-TH");
+const tx=n=>{let t=0,l=0;for(const[h,r]of B){t+=Math.max(Math.min(n,h)-l,0)*r/100;l=h}return t};
+const $=i=>document.getElementById(i);
+const g=i=>{const e=$(i);return e.type==="checkbox"?(e.checked?1:0):Math.max(0,+e.value||0)};
+const MN=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+const M=`<section class="card"><h2>รายได้และภาษีที่ถูกหักรายเดือน</h2><p class="hint">กรอกตามสลิปที่ได้รับในแต่ละเดือนของปี 2569 (นับตามวันที่เงินเข้า) เดือนที่ยังไม่ถึงให้ใส่ค่าประมาณ</p><div class="tw"><table><thead><tr><th>เดือน</th><th>เงินเดือน</th><th>ค่ากะ</th><th>OT</th><th>ภาษีที่ถูกหัก</th></tr></thead><tbody>${MN.map((m,i)=>`<tr><td>${m}</td>${["s","k","o","w"].map(c=>`<td><input type="number" id="${c}${i}" min="0" step="any" inputmode="decimal" placeholder="0" value=""></td>`).join("")}</tr>`).join("")}</tbody></table></div><div class="bt"><button type="button" id="cp">ใช้เงินเดือนของ ม.ค. กับเดือนที่ว่าง</button><button type="button" id="ot">ประมาณ OT เดือนที่ว่างจากค่าเฉลี่ย</button></div><div class="kv"><span>รวมรายได้รายเดือนทั้งปี</span><b id="ms">0</b></div><div class="kv"><span>รวมภาษีที่ถูกหักแล้ว (ดูจากสลิปหรือใบ 50 ทวิ)</span><b id="wsum">0</b></div></section>`;
+$("form").innerHTML=S.map(([t,fs],k)=>(k==0?M:"")+`<section class="card"><h2>${t}</h2>${fs.map(f=>`<div class="f"><label for="${f.id}">${f.l}</label><input type="number" id="${f.id}" min="0" step="any" inputmode="decimal" value="${f.v||""}" placeholder="0">${f.h?`<small>${f.h}</small>`:""}</div>`).join("")}</section>`).join("");
+document.querySelectorAll("input").forEach(e=>e.addEventListener("input",calc));
+$("cp").onclick=()=>{for(const c of["s","k"]){const a=$(c+"0").value;for(let i=1;i<12;i++)if(!$(c+i).value)$(c+i).value=a}calc()};
+$("ot").onclick=()=>{const v=[];for(let i=0;i<12;i++)if($("o"+i).value!=="")v.push(+$("o"+i).value);if(!v.length)return;const a=Math.round(v.reduce((x,y)=>x+y,0)/v.length);for(let i=0;i<12;i++)if($("o"+i).value==="")$("o"+i).value=a;calc()};
+$("clr").onclick=()=>{if(!confirm("ล้างข้อมูลที่กรอกและที่บันทึกไว้ทั้งหมด?"))return;document.querySelectorAll("input").forEach(e=>{e.value=""});calc()};
+
+/* ---- บันทึกข้อมูล: db (ส่วนตัวต่อบัญชี) + localStorage สำรอง ---- */
+const K="thtax69";let ref=null,ready=false,tm=null,busy=false,again=false;
+const say=t=>{$("sv").textContent=t};
+const snap=()=>{const v={};document.querySelectorAll("input").forEach(e=>{if(e.value!=="")v[e.id]=e.value});return v};
+const apply=v=>{document.querySelectorAll("input").forEach(e=>{e.value=v[e.id]!==undefined?v[e.id]:(e.id in v?"":e.value)});for(const id in v){const e=$(id);if(e)e.value=v[id]}};
+function save(){
+try{localStorage.setItem(K,JSON.stringify(snap()))}catch(e){}
+if(!ready||!ref)return;
+clearTimeout(tm);tm=setTimeout(push,600)}
+async function push(){
+if(busy){again=true;return}
+busy=true;
+try{await ref.set({v:snap(),t:Date.now()});say("บันทึกแล้ว ข้อมูลจะอยู่ครบเมื่อรีเฟรชหรือเปิดจากเครื่องอื่น")}
+catch(e){say("บันทึกขึ้นระบบไม่สำเร็จ เก็บไว้ในเบราว์เซอร์เครื่องนี้แทน")}
+busy=false;if(again){again=false;push()}}
+try{const v=JSON.parse(localStorage.getItem(K)||"{}");apply(v)}catch(e){}
+calc();
+(async()=>{
+try{
+if(!window.claude)throw 0;
+const [db,user]=await Promise.all([claude.use("db"),claude.use("user")]);
+if(!db||!user)throw 0;
+const id=await user.id();
+ref=db.collection("data/users/"+id).doc("tax69");
+const s=await ref.get();
+if(s.exists){const d=s.data();if(d&&d.v){document.querySelectorAll("input").forEach(e=>{e.value=""});apply(d.v);calc();say("โหลดข้อมูลที่บันทึกไว้แล้ว")}}
+else say("ยังไม่มีข้อมูลบันทึก กรอกแล้วระบบจะเก็บให้อัตโนมัติ");
+ready=true;
+if(!s.exists&&Object.keys(snap()).length)push();
+}catch(e){ready=false;say("เก็บข้อมูลไว้ในเบราว์เซอร์เครื่องนี้ (ยังไม่ได้เชื่อมระบบบันทึกส่วนตัว)")}
+})();
+
+function calc(){
+let ms=0,ssA=0,wsum=0;for(let i=0;i<12;i++){const t=g("s"+i)+g("k"+i)+g("o"+i);ms+=t;ssA+=Math.min(t*.05,875);wsum+=g("w"+i)}$("wsum").textContent=F(wsum);$("ms").textContent=F(ms);
+const inc=ms+g("bon"),exp=Math.min(inc*.5,1e5),per=6e4;
+const fam=0;
+const ss=Math.min($("ss").value===""?ssA:g("ss"),10.5e3),hl=Math.min(g("hlt"),25e3),lh=Math.min(g("life")+hl,1e5),phl=0,spl=0;
+const pvd=Math.min(g("pvd"),inc*.15,5e5),rmf=Math.min(g("rmf"),inc*.3,5e5),pen=Math.min(g("pen"),inc*.15,2e5),nsf=Math.min(g("nsf"),3e4);
+const ret=Math.min(pvd+rmf+pen+nsf,5e5),esg=Math.min(g("esg"),inc*.3,3e5),mor=Math.min(g("mor"),1e5),oth=g("oth");
+const rows=[["เงินได้ทั้งปี",inc],["หักค่าใช้จ่าย (50% สูงสุด 100,000)",-exp],["ลดหย่อนส่วนตัว",-per],["ลดหย่อนครอบครัว",-fam],["ประกันสังคม",-ss],["ประกันชีวิตและสุขภาพ",-(lh+phl+spl)],["กองทุนเพื่อเกษียณ",-ret],["Thai ESG / ESGX",-esg],["ดอกเบี้ยบ้าน",-mor],["ลดหย่อนอื่น ๆ",-oth]];
+const pre=Math.max(inc-exp-per-fam-ss-lh-phl-spl-ret-esg-mor-oth,0);
+const dcap=pre*.1,don=Math.min(g("dg")+2*g("de"),dcap);
+rows.push(["เงินบริจาค (ไม่เกิน 10% ของเงินได้หลังหักลดหย่อน)",-don]);
+const net=Math.max(pre-don,0);
+let tax=0,lo=0,lad="",mr=0;
+B.forEach(([hi,r])=>{const w=Math.max(Math.min(net,hi)-lo,0),t=w*r/100;tax+=t;if(w>0)mr=r;
+const size=hi===Infinity?0:hi-lo,pct=w>0?(size?w/size*100:100):0;
+lad+=`<div>${F(lo+(lo?1:0))}${hi===Infinity?"+":"–"+F(hi)}</div><div class="bw"><i style="width:${pct}%"></i></div><div class="r"><span class="rate">${w>0?F(w)+" × "+r+"%":r+"%"}</span>${w>0?" = "+F(t):""}</div>`;lo=hi});
+$("lad").innerHTML=lad;
+const cb=B.findIndex(b=>net<=b[0]),nxt=net>0&&cb<7?`<div class="kv"><span>เงินได้สุทธิอีก ${F(B[cb][0]-net)} บาทจะขึ้นขั้น ${B[cb+1][1]}%</span><b></b></div>`:"";
+const rm=Math.max(5e5-ret,0),R=[["เบี้ยประกันชีวิต/สุขภาพ (วงเงินรวม 100,000)",1e5-lh],["กองทุนสำรองเลี้ยงชีพ / กบข.",Math.min(inc*.15-pvd,rm)],["RMF",Math.min(inc*.3-rmf,rm)],["ประกันชีวิตแบบบำนาญ",Math.min(inc*.15-pen,2e5-pen,rm)],["Thai ESG / ESGX",Math.min(inc*.3,3e5)-esg],["ดอกเบี้ยบ้าน",1e5-mor]].filter(r=>r[1]>=1&&net>0);
+$("room").innerHTML=R.length?R.map(([n,v])=>{const u=Math.min(v,net);return `<div class="kv"><span>${n}<br><span class="hint">ใช้ได้อีก ${F(v)} บาท</span></span><b>ประหยัดได้ ${F(tx(net)-tx(net-u))}</b></div>`}).join("")+`<p class="hint" style="margin-top:8px">คิดแยกทีละรายการ ถ้าใช้หลายรายการพร้อมกัน ผลประหยัดรวมจะไม่เท่ากับผลบวก (เพราะลงขั้นภาษีต่ำลง) และกองทุนมีเงื่อนไขการถือครอง ศึกษาก่อนซื้อ</p>`:`<p class="hint">กรอกรายได้ก่อน แล้วจะแสดงสิทธิ์ที่ยังเหลือและภาษีที่ประหยัดได้</p>`;
+$("sum").innerHTML=rows.filter((r,i)=>i===0||r[1]!==0).map(r=>`<div class="kv"><span>${r[0]}</span><b>${r[1]<0?"−":""}${F(Math.abs(r[1]))}</b></div>`).join("")+`<div class="kv t"><span>เงินได้สุทธิ</span><b>${F(net)}</b></div><div class="kv t"><span>ภาษีทั้งปี</span><b>${F(tax)}</b></div><div class="kv"><span>ภาษีเฉลี่ยต่อเดือน</span><b>${F(tax/12)}</b></div>`+nxt;
+$("rt").textContent=F(tax)+" บาท";
+const eff=inc?tax/inc*100:0,wh=wsum,d=tax-wh;
+let s=`อัตราภาษีเฉลี่ย ${eff.toFixed(1)}% ของเงินได้ · ขั้นสูงสุดที่ตก ${mr}%`;
+if(wh>0){$("rl").textContent=d>0?"ต้องจ่ายเพิ่ม":d<0?"ขอคืนภาษีได้":"พอดีกับที่ถูกหักไว้";$("rt").textContent=F(Math.abs(d))+" บาท";s=`ภาษีทั้งปี ${F(tax)} − ถูกหักไว้ ${F(wh)}`}
+else $("rl").textContent="ภาษีที่ต้องเสียทั้งปี";
+const ded=per+fam+ss+lh+phl+spl+ret+esg+mor+oth+don;
+let sl=`<li><b>รวมเงินได้ทั้งปี</b><span>เงินเดือน ค่ากะ OT และโบนัสที่ได้รับตลอดปี = <u>${F(inc)}</u> บาท</span></li><li><b>หักค่าใช้จ่าย</b><span>50% ของเงินได้ = ${F(inc*.5)} แต่หักได้ไม่เกิน 100,000 จึงหัก <u>${F(exp)}</u> บาท</span></li><li><b>หักค่าลดหย่อน</b><span>ส่วนตัว 60,000 + ประกันสังคม ${F(ss)}${ded-per-ss>0?" + รายการอื่น "+F(ded-per-ss):""} = <u>${F(ded)}</u> บาท</span></li><li><b>ได้เงินได้สุทธิ</b><span>${F(inc)} − ${F(exp)} − ${F(ded)} = <u>${F(net)}</u> บาท</span></li><li><b>คิดภาษีทีละขั้นบันได</b><span>`;
+let lo2=0;const pt=[];B.forEach(([hi,r])=>{const w=Math.max(Math.min(net,hi)-lo2,0);if(w>0&&r>0)pt.push(`${F(w)} × ${r}% = ${F(w*r/100)}`);lo2=hi});
+sl+=(pt.length?pt.join("<br>")+"<br>":"เงินได้สุทธิไม่เกิน 150,000 ได้รับยกเว้นภาษี<br>")+`รวมเป็น <u>${F(tax)}</u> บาท</span></li><li><b>เทียบกับที่ถูกหักแล้ว</b><span>${wh>0?`ถูกหักไปแล้ว ${F(wh)} บาท ${d>0?"ต้องจ่ายเพิ่ม":d<0?"ขอคืนได้":"พอดี"} <u>${F(Math.abs(d))}</u> บาท`:"กรอกภาษีที่ถูกหักในตารางด้านบน เพื่อดูว่าขอคืนหรือจ่ายเพิ่ม"}</span></li>`;
+$("stl").innerHTML=sl;
+const SH=["0–150k","–300k","–500k","–750k","–1M","–2M","–5M","5M+"];let lo3=0,sg="",tb="";
+B.forEach(([hi,r],i)=>{const size=hi===Infinity?3e6:hi-lo3,w=Math.max(Math.min(net,hi)-lo3,0),full=hi===Infinity?null:size*r/100;
+sg+=`<div class="c"><div class="s" style="height:${34+i*22}px"><i style="height:${Math.min(w/size*100,100)}%"></i></div><b>${r}%</b><small>${SH[i]}</small></div>`;
+tb+=`<div class="kv"><span>ขั้น ${i+1}: ${F(lo3+(lo3?1:0))}${hi===Infinity?" ขึ้นไป":" – "+F(hi)}<br><span class="hint">อัตรา ${r}%${full!==null?" · เต็มขั้นเสีย "+F(full):""}</span></span><b>${w>0?F(w*r/100):"–"}</b></div>`;lo3=hi});
+$("stg").innerHTML=sg;$("stx").innerHTML=tb;
+$("rs").textContent=s;save();
+}
+</script>
+</body>
+</html>
